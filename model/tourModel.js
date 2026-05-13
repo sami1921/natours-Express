@@ -13,6 +13,11 @@ const tourSchema = new mongoose.Schema({
     type: Number,
     //required: [true, 'a tour must have a group size'],
   },
+  difficulty: {
+    type: String,
+    required: [true, 'A tour must have a difficulty'],
+    enum: ['easy', 'difficult', 'medium'],
+  },
   ratingAvearage: {
     type: Number,
     default: 4.5,
@@ -44,7 +49,7 @@ const tourSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  startDate: [Date],
+  startDates: [Date],
 });
 const Tour = mongoose.model('Tour', tourSchema);
 module.exports = Tour;
