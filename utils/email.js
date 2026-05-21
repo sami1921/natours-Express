@@ -10,9 +10,9 @@ const sendEmail = async (option) => {
   });
   const mailOption = {
     from: 'samuel ayalew <hello@sami.io>',
-    to: SchemaTypeOptions.email,
-    subject: SchemaTypeOptions.subject,
-    text: SchemaTypeOptions.message,
+    to: option.email,
+    subject: option.subject,
+    text: option.message,
   };
   await transporter.sendMail(mailOption);
 };
