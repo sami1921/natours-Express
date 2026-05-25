@@ -12,7 +12,7 @@ const signToken = (id) => {
 };
 const createSendToken = (user, statuscode, res) => {
   const token = signToken(user._id);
-  res.status(ststusCode).json({
+  res.status(statuscode).json({
     status: 'success',
     token,
     data: {
@@ -28,7 +28,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
-  createSendTokennew(newUser, 201, res);
+  createSendToken(newUser, 201, res);
 });
 exports.login = catchAsync(async (req, res, next) => {
   const email = req.body.email;
@@ -46,7 +46,7 @@ exports.login = catchAsync(async (req, res, next) => {
       ),
     );
   }
-  createSendTokennew(user, 200, res);
+  createSendToken(user, 200, res);
 });
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
@@ -137,7 +137,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetToken = undefined;
   user.passwordResetTokenExpires = undefined;
   await user.save();
-  createSendTokennew(user, 200, res);
+  createSendToken(user, 200, res);
 });
 exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id).select('+password');
@@ -147,5 +147,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
-  createSendTokennew(user, 200, res);
+  createSendToken(user, 200, res);
 });

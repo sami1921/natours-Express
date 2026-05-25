@@ -4,8 +4,8 @@ const catchAsync = require('../utils/catchAsync');
 //console.log(tours);
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
-  object.Keys(obj).forEach((el) => {
-    if (allowedFields.includes(el)) newObj[ei] = obj[el];
+  Object.keys(obj).forEach((el) => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
   });
   return newObj;
 };
@@ -38,6 +38,13 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     data: {
       user: updatedUser,
     },
+  });
+});
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user.id, { activate: false });
+  res.status(204).json({
+    status: 'success',
+    data: null,
   });
 });
 exports.createUser = (req, res) => {
